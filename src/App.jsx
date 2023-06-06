@@ -8,6 +8,11 @@ import DetalleProducto from "./components/views/DetalleProducto";
 import CrearProducto from "./components/views/producto/CrearProducto";
 import EditarProducto from "./components/views/producto/EditarProducto";
 import Administrador from "./components/views/Administrador";
+// npm install --save sweetalert2 sweetalert2-react-content liberia sweetAlert
+// npm install react-router-dom libreria cuando mi proyecto en react tiene muchas paginas
+// npm install react-hook-form libreria para validacion de formularios rapidamente
+// npm install -g json-server Instala en mi computadora de manera global para
+// ciertos comandos, para simular una api local
 
 function App() {
   return (
