@@ -1,6 +1,8 @@
 import { Form, Button, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { iniciarSesion } from "../../helpers/queries";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   // Declaramos el hook use form
@@ -13,6 +15,7 @@ const Login = () => {
     formState: { errors },
     reset,
   } = useForm();
+  const navegacion = useNavigate();
 
   const onSubmit = (usuario) => {
     console.log(usuario);
@@ -21,12 +24,24 @@ const Login = () => {
       iniciarSesion(usuario).then((respuesta)=>{
         if (respuesta) {
           console.log("aqui esta todo bien con el usuario");
+          sessionStorage.setItem("usuario", JSON.stringify(respuesta))
+          Swal.fire(
+            'Sesion iniciada con exito!',
+            'Los datos ingresados son correctos.',
+            'success'
+            )
+            reset();
+            // usenavigate nos direcciona a la pagina del adminstrador
+            navegacion("/administrador")
         }else{
-          console.log("Email o contraseña incorrectos");
+          Swal.fire(
+            'Error!',
+            'El emal o password son incorrectos.',
+            'error'
+          )
         }
       })
 
-    reset();
   };
 
   return (
