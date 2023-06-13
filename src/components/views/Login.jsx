@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import { Form, Button, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { iniciarSesion } from "../../helpers/queries";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({setUsuarioLogueado}) => {
+const Login = ({ setUsuarioLogueado }) => {
   // Declaramos el hook use form
   // register = lugar de la libreria donde vamos a guardar el input de mail y password
   // objeto de errores mostrara las partes del formulario que no completo o son invalidas

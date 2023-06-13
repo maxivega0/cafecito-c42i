@@ -19,7 +19,8 @@ import { useState } from "react";
 // ciertos comandos, para simular una api local
 
 function App() {
-  const usuarioSessionStorage = JSON.parse(sessionStorage.getItem("usuario")) || {}
+  const usuarioSessionStorage =
+    JSON.parse(sessionStorage.getItem("usuario")) || {};
   const [usuarioLogueado, setUsuarioLogueado] = useState(usuarioSessionStorage);
 
   return (

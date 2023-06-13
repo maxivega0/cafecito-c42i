@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
@@ -6,8 +7,8 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
   const cerrarSesion = () => {
     sessionStorage.removeItem("usuario");
     setUsuarioLogueado({});
-    navegacion("/")
-  }
+    navegacion("/");
+  };
 
   return (
     <Navbar bg="danger" variant="dark" expand="lg">
@@ -29,7 +30,9 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                 <NavLink end className="nav-item nav-link" to="/Administrador">
                   Administrador
                 </NavLink>
-                <Button variant="dark" onClick={cerrarSesion}>LogOut</Button>
+                <Button variant="dark" onClick={cerrarSesion}>
+                  LogOut
+                </Button>
               </>
             ) : (
               <NavLink end className="nav-item nav-link" to="/Login">
