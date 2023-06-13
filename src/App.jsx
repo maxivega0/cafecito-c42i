@@ -11,6 +11,7 @@ import Administrador from "./components/views/Administrador";
 import CrearProducto from "./components/views/producto/CrearProducto";
 import EditarProducto from "./components/views/producto/EditarProducto";
 import { BrowserRouter, Routes, Route } from "react-router-dom"; //componentes para rutas
+import { useState } from "react";
 // npm install --save sweetalert2 sweetalert2-react-content liberia sweetAlert
 // npm install react-router-dom libreria cuando mi proyecto en react tiene muchas paginas
 // npm install react-hook-form libreria para validacion de formularios rapidamente
@@ -18,13 +19,23 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"; //componentes p
 // ciertos comandos, para simular una api local
 
 function App() {
+  const usuarioSessionStorage = JSON.parse(sessionStorage.getItem("usuario")) || {}
+  const [usuarioLogueado, setUsuarioLogueado] = useState(usuarioSessionStorage);
+
   return (
     <BrowserRouter>
-      <Menu></Menu>
+      <Menu
+        usuarioLogueado={usuarioLogueado}
+        setUsuarioLogueado={setUsuarioLogueado}
+      ></Menu>
       <Routes>
         <Route exact path="/" element={<Inicio></Inicio>}></Route>
         <Route exact path="/registro" element={<Registro></Registro>}></Route>
-        <Route exact path="/login" element={<Login></Login>}></Route>
+        <Route
+          exact
+          path="/login"
+          element={<Login setUsuarioLogueado={setUsuarioLogueado}></Login>}
+        ></Route>
         <Route
           exact
           path="/detalle"

@@ -4,7 +4,7 @@ import { iniciarSesion } from "../../helpers/queries";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({setUsuarioLogueado}) => {
   // Declaramos el hook use form
   // register = lugar de la libreria donde vamos a guardar el input de mail y password
   // objeto de errores mostrara las partes del formulario que no completo o son invalidas
@@ -19,29 +19,26 @@ const Login = () => {
 
   const onSubmit = (usuario) => {
     console.log(usuario);
-      // then implica lo siguiente: yo ejecutare una funcion, una vez que se ejecute iniciar sesion, espera que se ejecute y entonces, realiza lo siguiente
-      // respuesta es una variable inventada que va a contener el return de "inciarSesion"
-      iniciarSesion(usuario).then((respuesta)=>{
-        if (respuesta) {
-          console.log("aqui esta todo bien con el usuario");
-          sessionStorage.setItem("usuario", JSON.stringify(respuesta))
-          Swal.fire(
-            'Sesion iniciada con exito!',
-            'Los datos ingresados son correctos.',
-            'success'
-            )
-            reset();
-            // usenavigate nos direcciona a la pagina del adminstrador
-            navegacion("/administrador")
-        }else{
-          Swal.fire(
-            'Error!',
-            'El emal o password son incorrectos.',
-            'error'
-          )
-        }
-      })
-
+    // then implica lo siguiente: yo ejecutare una funcion, una vez que se ejecute iniciar sesion, espera que se ejecute y entonces, realiza lo siguiente
+    // respuesta es una variable inventada que va a contener el return de "inciarSesion"
+    iniciarSesion(usuario).then((respuesta) => {
+      if (respuesta) {
+        console.log("aqui esta todo bien con el usuario");
+        sessionStorage.setItem("usuario", JSON.stringify(respuesta));
+        // actualzar state de app
+        setUsuarioLogueado(respuesta);
+        Swal.fire(
+          "Sesion iniciada con exito!",
+          "Los datos ingresados son correctos.",
+          "success"
+        );
+        reset();
+        // usenavigate nos direcciona a la pagina del adminstrador
+        navegacion("/administrador");
+      } else {
+        Swal.fire("Error!", "El emal o password son incorrectos.", "error");
+      }
+    });
   };
 
   return (
