@@ -1,8 +1,26 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import { Table, Button } from "react-bootstrap";
+import Swal from "sweetalert2";
+import { obtenerListaProductos } from "../../helpers/queries";
 import ItemProducto from "./producto/ItemProducto";
 
 const Administrador = () => {
-    return (
+  const [productos, SetProductos] = useState([]);
+
+  useEffect(()=>{
+    //consultar a la api y guardar la respuesta en el state
+    obtenerListaProductos().then((respuesta)=>{
+      //todo: preguntar si la respuesta tiene
+      if(respuesta){
+        SetProductos(respuesta);
+      }else{
+        Swal.fire('Error', 'Intente realizar esta operación en unos minutos', 'error');
+      }
+    })
+  },[])
+
+  return (
         <section className="container mainSection">
         <div className="d-flex justify-content-between align-items-center mt-5">
           <h1 className="display-4 ">Productos disponibles</h1>
@@ -23,7 +41,10 @@ const Administrador = () => {
             </tr>
           </thead>
           <tbody>
-           <ItemProducto></ItemProducto>
+            {
+              productos.map((producto)=> <ItemProducto key={producto.id} producto={producto}></ItemProducto>)
+            }
+         
           </tbody>
         </Table>
       </section>
