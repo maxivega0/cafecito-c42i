@@ -43,19 +43,12 @@ function App() {
           element={<DetalleProducto></DetalleProducto>}
         ></Route>
         <Route
-          exact
-          path="/administrador"
-          element={<Administrador></Administrador>}
-        ></Route>
-        <Route
-          exact
-          path="/administrador/crear-producto"
-          element={<CrearProducto></CrearProducto>}
-        ></Route>
-        <Route
-          exact
-          path="/administrador/editar-producto"
-          element={<EditarProducto></EditarProducto>}
+        // El "*" sigifica que aqui van más palabras
+          path="/administrador/*"
+          // dejamos pendiente que construir
+          element={
+
+          }
         ></Route>
         <Route path="*" element={<Error404></Error404>}></Route>
       </Routes>
