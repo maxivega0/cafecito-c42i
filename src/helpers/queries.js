@@ -1,7 +1,7 @@
 // Todas las cosultas las llamamos desde acá
 // Llamar una variable de entorno
 const URL_usuario = import.meta.env.VITE_API_USUARIO;
-const URL_producto = import.meta.env.VITE_API_PRODUCTO;
+const URL_producto = import.meta.env.VITE_API_PRODUCTOS;
 
 // const URL_productos = import.meta.env.VITE_API_PRODUCTOS
 

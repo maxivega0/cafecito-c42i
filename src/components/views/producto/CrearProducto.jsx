@@ -48,7 +48,7 @@ const CrearProducto = () => {
           />
           <Form.Text className="text-danger">
             {/*  */}
-            {errors.producto?.message}
+            {errors.nombreProducto?.message}
           </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formPrecio">
@@ -86,7 +86,7 @@ const CrearProducto = () => {
           />
           <Form.Text className="text-danger">
             {/*  */}
-            {errors.URLImg?.message}
+            {errors.imagen?.message}
           </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formPrecio">
