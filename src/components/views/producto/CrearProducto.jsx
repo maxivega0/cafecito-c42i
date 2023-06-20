@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { Form, Button } from "react-bootstrap";
+import { crearProducto } from "../../../helpers/queries";
 
 const CrearProducto = () => {
   const {
@@ -11,9 +12,18 @@ const CrearProducto = () => {
   } = useForm();
   const onSubmit = (nuevoProducto) => {
     console.log(nuevoProducto);
+    crearProducto(nuevoProducto).then((respuesta) => {
+      if (respuesta.status === 201) {
+        Swal.fire("Producto creado correctamente!", `El producto ${nuevoProducto.nombreProducto} fue creado correctamente`, "success");
+        reset();
+      }else{
+        Swal.fire("Ocurrio un error!", `El producto ${nuevoProducto.nombreProducto} no pudo ser creado`, "error");
+
+      }
+    })
     // then implica lo siguiente: yo ejecutare una funcion, una vez que se ejecute iniciar sesion, espera que se ejecute y entonces, realiza lo siguiente
     // respuesta es una variable inventada que va a contener el return de "inciarSesion"
-    Swal.fire("Producto creado correctamente!", "", "success");
+    
     reset();
   };
 
@@ -27,7 +37,7 @@ const CrearProducto = () => {
           <Form.Control
             type="text"
             placeholder="Ej: Cafe"
-            {...register("producto", {
+            {...register("nombreProducto", {
               required: "El nombre del producto es un dato obligatorio",
               // expresion regular
               pattern: {
@@ -65,7 +75,7 @@ const CrearProducto = () => {
           <Form.Control
             type="text"
             placeholder="Ej: https://www.pexels.com/es-es/vans-en-blanco-y-negro-fuera-de-la-decoracion-para-colgar-en-la-pared-1230679/"
-            {...register("URLImg", {
+            {...register("imagen", {
               required: "La URL de imagen es un campo obligatorio",
               // expresion regular
               pattern: {

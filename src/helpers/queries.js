@@ -42,12 +42,12 @@ export const iniciarSesion = async (usuario) => {
 export const obtenerListaProductos = async () => {
   try {
     // Cuando vea que en una peticion fetch hay un solo argumento, es xq es una peticion GET
-    const respuesta = await fetch (URL_producto)
+    const respuesta = await fetch(URL_producto);
     // console.log(respuesta);
-    const listaProductos = await respuesta.json()
+    const listaProductos = await respuesta.json();
     return listaProductos;
-  } catch (error) {
-    console.log(error);
+  }catch (error) {
+    console.log(error)
   }
 }
 
@@ -55,55 +55,55 @@ export const obtenerListaProductos = async () => {
 export const crearProducto = async (producto) => {
   try {
     // Una peticion post necesita un 2do argumento, sera el metodo que elegí
-    const respuesta = await fetch (URL_producto,{
-      method : "POST", 
-      headers : {
+    const respuesta = await fetch(URL_producto, {
+      method: "POST",
+      headers: {
         // Lineas en formato JSON
-        "Content-Type" : "application/json"
+        "Content-Type": "application/json",
       },
-      body : JSON.stringify(producto)
-    })
+      body: JSON.stringify(producto),
+    });
     return respuesta; // el status de la respuesta es 201
   } catch (error) {
     console.log(error);
   }
-}
+};
 export const editarProducto = async (producto, id) => {
   try {
     // Una peticion post necesita un 2do argumento, sera el metodo que elegí
-    const respuesta = await fetch (URL_producto+"/"+id,{
-      method : "PUT", 
-      headers : {
+    const respuesta = await fetch(URL_producto + "/" + id, {
+      method: "PUT",
+      headers: {
         // Lineas en formato JSON
-        "Content-Type" : "application/json"
+        "Content-Type": "application/json",
       },
-      body : JSON.stringify(producto)
-    })
+      body: JSON.stringify(producto),
+    });
     return respuesta; // el status de la respuesta es 200
   } catch (error) {
     console.log(error);
   }
-}
+};
 export const producto = async (id) => {
   try {
     // Una peticion post necesita un 2do argumento, sera el metodo que elegí
-    const respuesta = await fetch (URL_producto+"/"+id,{
-      method : "DELETE"
-    })
+    const respuesta = await fetch(URL_producto + "/" + id, {
+      method: "DELETE",
+    });
     return respuesta; // el status de la respuesta es 200
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const obtenerProducto = async (id) => {
   try {
     // Cuando vea que en una peticion fetch hay un solo argumento, es xq es una peticion GET
-    const respuesta = await fetch (URL_producto+"/"+id)
+    const respuesta = await fetch(URL_producto + "/" + id);
     // console.log(respuesta);
-    const producto = await respuesta.json()
+    const producto = await respuesta.json();
     return producto; // voy a retornar un objeto producto
   } catch (error) {
     console.log(error);
   }
-}
+};

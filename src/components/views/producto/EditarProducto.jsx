@@ -1,13 +1,34 @@
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import Swal from "sweetalert2";
+import { useParams } from "react-router-dom";
+import { obtenerProducto } from "../../../helpers/queries";
+
 const EditarProducto = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    setValue
   } = useForm();
+
+  // Extra de la url el parametro
+  const {id} = useParams();
+
+  useEffect(() => {
+    obtenerProducto(id).then((respuesta) => {
+      if (respuesta) {
+        // cargar en el formulario los datos del objeto
+        setValue("nombreProducto", respuesta.nombreProducto)
+        setValue("precio", respuesta.precio)
+        setValue("categoria", respuesta.categoria)
+        setValue("imagen", respuesta.imagen)
+      }
+    })
+  }, [])
+
   const onSubmit = (editarProducto) => {
     console.log(editarProducto);
     // then implica lo siguiente: yo ejecutare una funcion, una vez que se ejecute iniciar sesion, espera que se ejecute y entonces, realiza lo siguiente
@@ -26,7 +47,7 @@ const EditarProducto = () => {
           <Form.Control
             type="text"
             placeholder="Ej: Cafe"
-            {...register("producto", {
+            {...register("nombreProducto", {
               required: "El nombre del producto es un dato obligatorio",
               // expresion regular
               pattern: {
@@ -64,7 +85,7 @@ const EditarProducto = () => {
           <Form.Control
             type="text"
             placeholder="Ej: https://www.pexels.com/es-es/vans-en-blanco-y-negro-fuera-de-la-decoracion-para-colgar-en-la-pared-1230679/"
-            {...register("URLImg", {
+            {...register("imagen", {
               required: "La URL de imagen es un campo obligatorio",
               // expresion regular
               pattern: {
