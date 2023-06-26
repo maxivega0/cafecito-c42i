@@ -84,7 +84,7 @@ export const editarProducto = async (producto, id) => {
     console.log(error);
   }
 };
-export const producto = async (id) => {
+export const eliminarProducto = async (id) => {
   try {
     // Una peticion post necesita un 2do argumento, sera el metodo que elegí
     const respuesta = await fetch(URL_producto + "/" + id, {

@@ -3,9 +3,14 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
-import { obtenerProducto } from "../../../helpers/queries";
+import { obtenerProducto, editarProducto } from "../../../helpers/queries";
+import { useNavigate } from "react-router-dom";
 
 const EditarProducto = () => {
+
+  const navegacion = useNavigate();
+
+
   const {
     register,
     handleSubmit,
@@ -29,8 +34,17 @@ const EditarProducto = () => {
     })
   }, [])
 
-  const onSubmit = (editarProducto) => {
-    console.log(editarProducto);
+  const onSubmit = (productoEditado) => {
+    console.log(productoEditado);
+    editarProducto(productoEditado, id).then((respuesta) => {
+      if (respuesta.status === 200) {
+        Swal.fire("Producto editado correctamente!", `El producto ${productoEditado.nombreProducto} sufrió cambios`, "success");
+        reset(); 
+        navegacion("/administrador");
+      }else{
+        Swal.fire("Ocurrio un error!", `El producto ${productoEditado.nombreProducto} no pudo ser editado`, "error");
+      }
+    })
     // then implica lo siguiente: yo ejecutare una funcion, una vez que se ejecute iniciar sesion, espera que se ejecute y entonces, realiza lo siguiente
     // respuesta es una variable inventada que va a contener el return de "inciarSesion"
     Swal.fire("Producto editado correctamente!", "", "success");
@@ -51,14 +65,14 @@ const EditarProducto = () => {
               required: "El nombre del producto es un dato obligatorio",
               // expresion regular
               pattern: {
-                value: /^[a-zA-Z\s]{2,32}$/,
+                value: /^[a-zA-ZáéíóúÁÉÍÓÚ]{2,32}$/,
                 message: `El nombre del producto debe contener entre 2 y 32 caracteres, no admite numeros y caracteres especiales`,
               },
             })}
           />
           <Form.Text className="text-danger">
             {/*  */}
-            {errors.producto?.message}
+            {errors.nombreProducto?.message}
           </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formPrecio">
@@ -96,7 +110,7 @@ const EditarProducto = () => {
           />
           <Form.Text className="text-danger">
             {/*  */}
-            {errors.URLImg?.message}
+            {errors.imagen?.message}
           </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formPrecio">

@@ -1,19 +1,11 @@
 {
   "productos": [
     {
-      "id": 1,
       "nombreProducto": "Café",
-      "precio": 300,
-      "categoria": "bebida caliente",
+      "precio": "300",
       "imagen": "https://images.pexels.com/photos/3020919/pexels-photo-3020919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      "descripcion": "alguna descripcion..."
-    },
-    {
-      "nombreProducto": "Cafe con leche",
-      "precio": "450",
-      "imagen": "https://www.pexels.com/es-es/foto/capuchino-en-taza-de-ceramica-3879495/",
       "categoria": "bebida caliente",
-      "id": 2
+      "id": 1
     }
   ],
   "usuarios": [

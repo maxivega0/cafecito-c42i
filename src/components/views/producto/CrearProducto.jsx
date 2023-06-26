@@ -41,7 +41,7 @@ const CrearProducto = () => {
               required: "El nombre del producto es un dato obligatorio",
               // expresion regular
               pattern: {
-                value: /^[a-zA-Z\s]{2,32}$/,
+                value: /^[a-zA-ZáéíóúÁÉÍÓÚ]{2,32}$/,
                 message: `El nombre del producto debe contener entre 2 y 32 caracteres, no admite numeros y caracteres especiales`,
               },
             })}
