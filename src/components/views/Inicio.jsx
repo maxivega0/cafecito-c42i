@@ -34,7 +34,7 @@ const Inicio = () => {
         <h1 className="display-4">Nuestros Productos</h1>
         <hr />
         <Row>
-        {productos.map((producto) => (
+          {productos.map((producto) => (
             <CardProducto key={producto.id} producto={producto}></CardProducto>
           ))}
         </Row>

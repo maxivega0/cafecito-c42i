@@ -7,44 +7,50 @@ import { obtenerProducto, editarProducto } from "../../../helpers/queries";
 import { useNavigate } from "react-router-dom";
 
 const EditarProducto = () => {
-
   const navegacion = useNavigate();
-
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-    setValue
+    setValue,
   } = useForm();
 
   // Extra de la url el parametro
-  const {id} = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     obtenerProducto(id).then((respuesta) => {
       if (respuesta) {
         // cargar en el formulario los datos del objeto
-        setValue("nombreProducto", respuesta.nombreProducto)
-        setValue("precio", respuesta.precio)
-        setValue("categoria", respuesta.categoria)
-        setValue("imagen", respuesta.imagen)
+        setValue("nombreProducto", respuesta.nombreProducto);
+        setValue("precio", respuesta.precio);
+        setValue("categoria", respuesta.categoria);
+        setValue("imagen", respuesta.imagen);
       }
-    })
-  }, [])
+    });
+  }, []);
 
   const onSubmit = (productoEditado) => {
     console.log(productoEditado);
     editarProducto(productoEditado, id).then((respuesta) => {
       if (respuesta.status === 200) {
-        Swal.fire("Producto editado correctamente!", `El producto ${productoEditado.nombreProducto} sufrió cambios`, "success");
-        reset(); 
+        Swal.fire(
+          "Producto editado correctamente!",
+          `El producto ${productoEditado.nombreProducto} sufrió cambios`,
+          "success"
+        );
+        reset();
         navegacion("/administrador");
-      }else{
-        Swal.fire("Ocurrio un error!", `El producto ${productoEditado.nombreProducto} no pudo ser editado`, "error");
+      } else {
+        Swal.fire(
+          "Ocurrio un error!",
+          `El producto ${productoEditado.nombreProducto} no pudo ser editado`,
+          "error"
+        );
       }
-    })
+    });
     // then implica lo siguiente: yo ejecutare una funcion, una vez que se ejecute iniciar sesion, espera que se ejecute y entonces, realiza lo siguiente
     // respuesta es una variable inventada que va a contener el return de "inciarSesion"
     Swal.fire("Producto editado correctamente!", "", "success");
@@ -117,7 +123,7 @@ const EditarProducto = () => {
           <Form.Label>Categoria*</Form.Label>
           <Form.Select
             {...register("categoria", {
-              required: "Seleccionar una categoria es un campo obligatorio"
+              required: "Seleccionar una categoria es un campo obligatorio",
               // expresion regular
             })}
           >
