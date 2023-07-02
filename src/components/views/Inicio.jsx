@@ -1,6 +1,28 @@
 import { Container, Row } from "react-bootstrap";
 import CardProducto from "./producto/CardProducto";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import { obtenerListaProductos } from "../../helpers/queries";
+
 const Inicio = () => {
+  const [productos, SetProductos] = useState([]);
+
+  useEffect(() => {
+    //consultar a la api y guardar la respuesta en el state
+    obtenerListaProductos().then((respuesta) => {
+      //todo: preguntar si la respuesta tiene
+      if (respuesta) {
+        SetProductos(respuesta);
+      } else {
+        Swal.fire(
+          "Error",
+          "Intente realizar esta operación en unos minutos",
+          "error"
+        );
+      }
+    });
+  }, []);
+
   return (
     <section className="mainSection">
       <img
@@ -12,10 +34,9 @@ const Inicio = () => {
         <h1 className="display-4">Nuestros Productos</h1>
         <hr />
         <Row>
-            <CardProducto></CardProducto>
-            <CardProducto></CardProducto>
-            <CardProducto></CardProducto>
-            <CardProducto></CardProducto>
+        {productos.map((producto) => (
+            <CardProducto key={producto.id} producto={producto}></CardProducto>
+          ))}
         </Row>
       </Container>
     </section>
