@@ -24,7 +24,7 @@ const DetalleProducto = () => {
               <Card.Title>{producto.nombreProducto}</Card.Title>
               <hr />
               <Card.Text>
-                {producto.nombreProducto}
+                {producto.descripcion}
                 <br />
                 <br />
                 <span className="text-danger fw-semibold ">

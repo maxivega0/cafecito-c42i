@@ -14,6 +14,7 @@ const CardProducto = ({ producto }) => {
         />
         <Card.Body>
           <Card.Title>{producto.nombreProducto}</Card.Title>
+          <Card.Title>{producto.descripcion}</Card.Title>
           <Card.Text>${producto.precio}</Card.Text>
           <Link className="btn btn-primary" to={"/detalle/" + producto.id}>
             Ver Detalle

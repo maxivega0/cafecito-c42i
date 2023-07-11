@@ -27,6 +27,7 @@ const ItemProducto = ({ producto }) => {
       <td>${producto.precio}</td>
       <td>{producto.imagen}</td>
       <td>{producto.categoria}</td>
+      <td>{producto.descripcion}</td>
       <td>
         <Link
           className="btn btn-warning"

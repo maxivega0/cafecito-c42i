@@ -58,10 +58,13 @@ const CrearProducto = () => {
             placeholder="Ej: 50"
             {...register("precio", {
               required: "El precio del producto es un dato obligatorio",
-              // expresion regular
-              pattern: {
-                value: /^\d{1,32}(\.\d+)?$/,
-                message: `El precio solo admite numeros y decimales, entre 1 y 32 caracteres`,
+              min:{
+                value:1,
+                message: 'El precio minimo es 1'
+              },
+              max: {
+                value: 10000,
+                message: 'El precio maximo es $10000'
               },
             })}
           />
@@ -106,6 +109,25 @@ const CrearProducto = () => {
           <Form.Text className="text-danger">
             {/*  */}
             {errors.categoria?.message}
+          </Form.Text>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formNombreProdcuto">
+          <Form.Label>Descripcion</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Ej: Cafe"
+            {...register("descripcion", {
+              required: "La descripcion del producto es un dato obligatoria",
+              // expresion regular
+              pattern: {
+                value: /^[a-zA-ZáéíóúÁÉÍÓÚ]{2,128}$/,
+                message: `El nombre del producto debe contener entre 2 y 128 caracteres, no admite numeros y caracteres especiales`,
+              },
+            })}
+          />
+          <Form.Text className="text-danger">
+            {/*  */}
+            {errors.descripcion?.message}
           </Form.Text>
         </Form.Group>
         <Button variant="primary" type="submit">
