@@ -8,7 +8,9 @@ const DetalleProducto = () => {
   const [producto, setProducto] = useState({});
   useEffect(() => {
     obtenerProducto(id).then((respuesta) => {
-      setProducto(respuesta);
+      if (respuesta) {
+        setProducto(respuesta);
+      }
     });
   }, []);
 
