@@ -72,7 +72,7 @@ const EditarProducto = () => {
               required: "El nombre del producto es un dato obligatorio",
               // expresion regular
               pattern: {
-                value: /^[a-zA-ZáéíóúÁÉÍÓÚ]{2,32}$/,
+                value: /^[a-zA-ZáéíóúÁÉÍÓÚ\s]{2,32}$/,
                 message: `El nombre del producto debe contener entre 2 y 32 caracteres, no admite numeros y caracteres especiales`,
               },
             })}
@@ -87,7 +87,7 @@ const EditarProducto = () => {
           <Form.Control
             type="number"
             placeholder="Ej: 50"
-            {...register("precio", {
+             {...register("precio", {
               required: "El precio del producto es un dato obligatorio",
               min:{
                 value:1,
@@ -143,21 +143,23 @@ const EditarProducto = () => {
           </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formDescripcion">
-          <Form.Label>Descripcion</Form.Label>
+          <Form.Label>Descripcion*</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Ej: Cafe"
+            placeholder="Ej: alguna descripcion"
             {...register("descripcion", {
-              required: "La descripcion del producto es un dato obligatoria",
-              // expresion regular
-              pattern: {
-                value: /^[a-zA-ZáéíóúÁÉÍÓÚ]{2,128}$/,
-                message: `El nombre del producto debe contener entre 2 y 128 caracteres, no admite numeros y caracteres especiales`,
+              required: "El nombre del producto es obligatorio",
+              minLength: {
+                value: 2,
+                message: "La cantidad minima de caracteres es de 2 digitos",
+              },
+              maxLength: {
+                value: 128,
+                message: "La cantidad minima de caracteres es de 2 digitos",
               },
             })}
           />
           <Form.Text className="text-danger">
-            {/*  */}
             {errors.descripcion?.message}
           </Form.Text>
         </Form.Group>

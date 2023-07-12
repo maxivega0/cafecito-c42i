@@ -21,8 +21,8 @@ const ItemProducto = ({ producto }) => {
 
   return (
     <tr>
-      {/* <td>{props.producto.id}</td> */}
-      <td>{producto.id}</td>
+      {/* <td>{props.producto._id}</td> */}
+      <td>{producto._id}</td>
       <td>{producto.nombreProducto}</td>
       <td>${producto.precio}</td>
       <td>{producto.imagen}</td>
@@ -31,13 +31,13 @@ const ItemProducto = ({ producto }) => {
       <td>
         <Link
           className="btn btn-warning"
-          to={"/administrador/editar-producto/" + producto.id}
+          to={"/administrador/editar-producto/" + producto._id}
         >
           Editar
         </Link>
         <Button
           variant="danger"
-          onClick={() => handleEliminarProducto(producto.id)}
+          onClick={() => handleEliminarProducto(producto._id)}
         >
           Borrar
         </Button>
