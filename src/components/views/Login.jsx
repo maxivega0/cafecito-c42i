@@ -23,7 +23,7 @@ const Login = ({ setUsuarioLogueado }) => {
     // then implica lo siguiente: yo ejecutare una funcion, una vez que se ejecute iniciar sesion, espera que se ejecute y entonces, realiza lo siguiente
     // respuesta es una variable inventada que va a contener el return de "inciarSesion"
     iniciarSesion(usuario).then((respuesta) => {
-      if (respuesta) {
+      if (respuesta && respuesta.status === 200) {
         console.log("aqui esta todo bien con el usuario");
         sessionStorage.setItem("usuario", JSON.stringify(respuesta));
         // actualzar state de app
@@ -37,7 +37,7 @@ const Login = ({ setUsuarioLogueado }) => {
         // usenavigate nos direcciona a la pagina del adminstrador
         navegacion("/administrador");
       } else {
-        Swal.fire("Error!", "El emal o password son incorrectos.", "error");
+        Swal.fire("Error!", "El email o password son incorrectos.", "error");
       }
     });
   };

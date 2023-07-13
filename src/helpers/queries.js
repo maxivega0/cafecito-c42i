@@ -15,27 +15,25 @@ const URL_productos = import.meta.env.VITE_API_PRODUCTO;
 // recibo un objeto usuario
 export const iniciarSesion = async (usuario) => {
   try {
-    const respuesta = await fetch(URL_usuario);
-    const listaUsuarios = await respuesta.json();
-    const usuarioBuscado = listaUsuarios.find(
-      (itemUsuario) => itemUsuario.email === usuario.email
-    );
-    if (usuarioBuscado) {
-      // email correcto
-      if (usuarioBuscado.password === usuario.password) {
-        return usuarioBuscado;
-      } else {
-        console.log("password incorrecto");
-        // password incorecto
-      }
-      // el mail es correcto
-    } else {
-      console.log("el email no existe");
-      // El mail no existe
-      return null;
+    const respuesta = await fetch(URL_usuario, {
+      method: "POST",
+      headers: {
+        // Lineas en formato JSON
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(usuario),
+    });
+// json extra el body parseado
+    const datos = await respuesta.json()
+    return {
+      status: respuesta.status,
+      nombreUsuario: datos.nombreUsuario
     }
+
+
   } catch (error) {
     console.log(error);
+    return null
   }
 };
 
