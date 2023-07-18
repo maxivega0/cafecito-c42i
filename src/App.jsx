@@ -7,6 +7,7 @@ import Inicio from "./components/views/Inicio";
 import Registro from "./components/views/Registro";
 import Login from "./components/views/Login";
 import DetalleProducto from "./components/views/DetalleProducto";
+// import "bootswatch/dist/sandstone/bootstrap.min.css"
 // import Administrador from "./components/views/Administrador";
 // import CrearProducto from "./components/views/producto/CrearProducto";
 // import EditarProducto from "./components/views/producto/EditarProducto";

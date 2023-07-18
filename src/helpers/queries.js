@@ -10,6 +10,7 @@ const URL_productos = import.meta.env.VITE_API_PRODUCTO;
     POST me permiten crear un elemento
     PUT / PATCH me permiten editar un elemento, si solo quiero cambiar un dato utilizo patch
     DELETE me permite eliminar un elemento o lista de elementos
+    hola este cambio hay que borrar
 */
 
 // recibo un objeto usuario
@@ -27,7 +28,8 @@ export const iniciarSesion = async (usuario) => {
     const datos = await respuesta.json()
     return {
       status: respuesta.status,
-      nombreUsuario: datos.nombreUsuario
+      nombreUsuario: datos.nombreUsuario,
+      token: datos.token
     }
 
 
@@ -58,6 +60,7 @@ export const crearProducto = async (producto) => {
       headers: {
         // Lineas en formato JSON
         "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuario")).token
       },
       body: JSON.stringify(producto),
     });
